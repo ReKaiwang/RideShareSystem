@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ride Request</title>
+     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+</head>
+<body>
+    <h1>Enter your ride Request </h1>
+    <form method="POST">
+        {{form.as_p}}
+        {% csrf_token %}
+        <input type="submit" value="Submit">
+    </form>
+    <div>
+        <a href="{% url 'index' %}">Share a Ride?</a>
+    </div>
+</body>
+</html>

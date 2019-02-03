@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ride Status</title>
+</head>
+<body>
+    <p >Your ride's status shows below:</p>
+    <form name = 'Status', method="POST">
+        {% csrf_token %}
+        <table border="1">
+        <tr>
+            <th>Arrive Time</th>
+            <th>Destination</th>
+            <th>Passage Number</th>
+            <th>Ride Status</th>
+        </tr>
+
+       <tr>
+           <td><input type = "time", name = "arriveTime", value="{{list.arriveTime}}"></td>
+           <td><input type = "text", name = "Destination", value="{{list.Destination}}"></td>
+           <td><input type = "text", name = "PassageNum", value="{{list.PassageNum}}"> </td>
+           {% if list.ride_status == 'F'%}
+           <td> Finished </td>
+           {% else %}
+           {% if list.ride_status == 'O'%}
+                <td> Open </td>
+           {% else %}
+                <td> Confirmed </td>
+
+           {%endif%}
+            {%endif%}
+       </tr>
+            </table>
+        <input type="submit" value="EDIT", >
+
+    </form>
+
+
+
+
+</body>
+</html>

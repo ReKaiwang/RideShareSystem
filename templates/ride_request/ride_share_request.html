@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Share a Ride!</title>
+</head>
+<body>
+<h1>Enter your Ride Share Request </h1>
+    <form method="POST">
+        {% csrf_token %}
+        <br>Arrive Time:<input type="time", name="begin"/>~<input type="time", name="end"/></br>
+        <br>Destination:<input type="text", name="Destination"/> </br>
+        <br>Passage Number:<input type="text", name="PassgeN"/> </br>
+        <br>Vehicle Type:<input type="text", name="Vehiclet"/> </br>
+        <br>Other Request:<input type="text", name="OtherRe"/> </br>
+        <input type="submit" value="Search">
+    </form>
+</body>
+</html>

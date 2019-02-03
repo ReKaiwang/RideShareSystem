@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sharelist</title>
+</head>
+<body>
+     <p >Valid Share Ride Shows Below:</p>
+    <form action = "{% url 'ridelist' %}" name = 'Status', method="POST">
+        {% csrf_token %}
+        <table border="1">
+        <tr>
+            <th>Arrive Time</th>
+            <th>Destination</th>
+            <th>Passage Number</th>
+            <th>Vehicle Type</th>
+            <th>Ride Status</th>
+            <th>Choice</th>
+        </tr>
+        {% for ride in list %}
+       <tr>
+           <td>{{ride.arriveTime}}</td>
+           <td>{{ride.Destination}}</td>
+           <td>{{ride.PassageNum}} </td>
+           <td>{{ride.Vehicle_type}}</td>
+           <td>{{ride.ride_status}}</td>
+           <td><input type="radio", name="choice" value={{ride.id}} ,required oninvalid="alert('Must choice one ride!')"/>
+       </tr>
+            {% endfor %}
+        </table>
+        <!--<input type="button" value="Choose Ride">-->
+        <button>Choose Ride</button>
+    </form>
+     <a href="{% url 'shareride' %}">Change Search Option</a>
+</body>
+</html>
