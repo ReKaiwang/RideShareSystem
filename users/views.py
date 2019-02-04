@@ -14,7 +14,14 @@ class SignUp(generic.CreateView):
 
 def Modify(request):
     form = CustomUserChangeForm
-    #curr = CustomUser.objects.get(pk=request.user.username)
+    #temp = CustomUser.objects.get(username=request.user.username)
+    # form.fields['email']=temp.email
+    # form.fields['driver']=temp.driver
+    # form.fields['vehicle_brand']=temp.vehicle_brand
+    # form.fields['plate_number']= temp.plate_number
+    # form.fields['maximum_number_of_passengers']=temp.maximum_number_of_passengers
+    # form.fields['special_vehicle_info']=    temp.special_vehicle_info
+    #curr = CustomUser.objects.get(pk=form.user.username)
     #print(curr)
     if request.method == 'POST':
         form = CustomUserChangeForm(request.POST)

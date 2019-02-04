@@ -5,6 +5,7 @@
     <title>Share a Ride!</title>
 </head>
 <body>
+{% if user.is_authenticated %}
 <h1>Enter your Ride Share Request </h1>
     <form method="POST">
         {% csrf_token %}
@@ -15,5 +16,10 @@
         <br>Other Request:<input type="text", name="OtherRe"/> </br>
         <input type="submit" value="Search">
     </form>
+    {% else %}
+      <p>You are not logged in</p>
+      <a href="{% url 'login' %}">login</a> |
+      <a href="{% url 'signup' %}">signup</a>
+    {% endif %}
 </body>
 </html>
