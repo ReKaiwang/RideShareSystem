@@ -15,4 +15,5 @@ class CustomUserChangeForm(UserChangeForm):
 
     class Meta:
         model = CustomUser
-        fields = ('username', 'email')
+        fields = ( 'email','driver','vehicle_brand','plate_number'
+                  ,'maximum_number_of_passengers','special_vehicle_info')

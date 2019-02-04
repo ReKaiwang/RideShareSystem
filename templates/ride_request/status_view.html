@@ -15,28 +15,30 @@
             <th>Passage Number</th>
             <th>Ride Status</th>
         </tr>
-
+      {% for ride in list %}
        <tr>
-           <td><input type = "time", name = "arriveTime", value="{{list.arriveTime}}"></td>
-           <td><input type = "text", name = "Destination", value="{{list.Destination}}"></td>
-           <td><input type = "text", name = "PassageNum", value="{{list.PassageNum}}"> </td>
-           {% if list.ride_status == 'F'%}
+           <td><input type = "text", name = "arriveTime", value="{{ride.arriveTime}}"></td>
+           <td><input type = "text", name = "Destination", value="{{ride.Destination}}"></td>
+           <td><input type = "text", name = "PassageNum", value="{{ride.PassageNum}}"> </td>
+           {% if ride.ride_status == 'F'%}
            <td> Finished </td>
            {% else %}
-           {% if list.ride_status == 'O'%}
+           {% if ride.ride_status == 'O'%}
                 <td> Open </td>
            {% else %}
                 <td> Confirmed </td>
 
            {%endif%}
             {%endif%}
+
        </tr>
+             {% endfor %}
             </table>
         <input type="submit" value="EDIT", >
 
     </form>
 
-
+<a href="{% url 'home' %}">back</a>
 
 
 </body>

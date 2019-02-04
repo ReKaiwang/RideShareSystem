@@ -1,12 +1,17 @@
 from django.db import models
 from django.urls import reverse
+from django.conf import settings
+from users.models import CustomUser
 
 # Create your models here.
 VEHCILE_TYPE =[
-    ('B','BMW'),
-    ('BZ','BENZ'),
-    ('H','Honda'),
-    ('O', 'Other')
+    ('v', 'volvo'),
+    ('a', 'audi'),
+    ('m', 'mercedes'),
+    ('t', 'toyota'),
+    ('h', 'honda'),
+    ('n', 'nissan'),
+    ('o', 'other')
     ]
 STATUS_TYPE = [
     ('O', 'Open'),
@@ -15,7 +20,14 @@ STATUS_TYPE = [
 
 ]
 class ride_request(models.Model):
-    arriveTime = models.TimeField(blank = False)
+    #user= models.ForeignKey(CustomUser,on_delete=models.CASCADE,)
+    user = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+    )
+    #owner=models.CharField(max_length=256,blank=True)
+    #arriveTime = models.TimeField(blank = False)
+    arriveTime = models.CharField(blank=False, max_length=256, help_text="Time form: xx:xx p.m/a.m")
     Destination = models.CharField(max_length = 256, blank = False)
     PassageNum = models.PositiveSmallIntegerField(blank = False,verbose_name="Passger Number")
     Vehicle_type = models.CharField(max_length = 256, blank = True, choices =VEHCILE_TYPE)

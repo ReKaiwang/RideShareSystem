@@ -7,6 +7,13 @@
 {% if user.is_authenticated %}
   Hi {{ user.username }}!
   <p><a href="{% url 'logout' %}">logout</a></p>
+  <p><a href="{% url 'riderequest'%}"> start a new ride</a></p>
+  <p><a href="{% url 'ridestatus'%}"> view your rides</a></p>
+  <a href="{% url 'modify' %}">Change your profile</a>
+
+  <!--<p><a href="{% url 'ridestatus'%}"> view your rides</a></p>-->
+
+
 {% else %}
   <p>You are not logged in</p>
   <a href="{% url 'login' %}">login</a> |

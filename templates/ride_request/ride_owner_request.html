@@ -12,8 +12,10 @@
         {% csrf_token %}
         <input type="submit" value="Submit">
     </form>
-    <div>
-        <a href="{% url 'index' %}">Share a Ride?</a>
+
+        <a href="{% url 'index' %}">Share a Ride?</a><br><br><br>
+        <a href="{% url 'home' %}">back</a><br>
+        <a href="{% url 'logout' %}">Logout</a>
     </div>
 </body>
 </html>
