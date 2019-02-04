@@ -11,9 +11,11 @@ class CustomUserCreationForm(UserCreationForm):
                   ,'maximum_number_of_passengers','special_vehicle_info') #'vehicle', 'plate_number', 'max_num', 'type')
 
 
-class CustomUserChangeForm(UserChangeForm):
+class CustomUserChangeForm(forms.ModelForm):
 
     class Meta:
         model = CustomUser
-        fields = ( 'email','driver','vehicle_brand','plate_number'
-                  ,'maximum_number_of_passengers','special_vehicle_info')
+        #fields = ( 'email','driver','vehicle_brand','plate_number'
+        #          ,'maximum_number_of_passengers','special_vehicle_info')
+        fields = ['email','driver','vehicle_brand','plate_number'
+            ,'maximum_number_of_passengers','special_vehicle_info']
