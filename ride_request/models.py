@@ -21,10 +21,8 @@ STATUS_TYPE = [
 ]
 class ride_request(models.Model):
     #user= models.ForeignKey(CustomUser,on_delete=models.CASCADE,)
-    user = models.ForeignKey(
-        settings.AUTH_USER_MODEL,
-        on_delete=models.CASCADE,
-    )
+    user = models.ManyToManyField(
+        settings.AUTH_USER_MODEL)
     #owner=models.CharField(max_length=256,blank=True)
     #arriveTime = models.TimeField(blank = False)
     arriveTime = models.CharField(blank=False, max_length=256, help_text="Time form: xx:xx p.m/a.m")
