@@ -7,7 +7,32 @@
 <h2>Modify</h2>
 <form method="post">
   {% csrf_token %}
-  {{ form.as_p }}
+  <ul border="1">
+
+
+           <li><input type = "email ", name = "email", value="{{usr.email}}"></li>
+           <li><input type = "text", name = "driver", value="{{usr.driver}}", list="dri-list"></li>
+            <datalist id = 'dri-list'>
+                <option>yes</option>
+                <option>no</option>
+            </datalist>
+           <li><input type = "text", name = "vehicle_brand", value="{{usr.vehicle_brand}}", list = "vehi-list"> </li>
+            <datalist id = "vehi-list">
+                <option>volvo</option>
+                <option>audi</option>
+                <option>mercedes</option>
+                <option>toyota</option>
+                <option>honda</option>
+                <option>nissan</option>
+                <option>other</option>
+            </datalist>
+            <li><input type = "text", name = "plate_number", value="{{usr.plate_number}}"></>
+            <li><input type = "number ", name = "plate_number", value="{{usr.plate_number}}"></li>
+            <li><input type = "text", name = "special_vehicle_info", value="{{usr.special_vehicle_info}}", list="dri-list"></li>
+
+
+
+            </ul>
   <input type="submit" value="Update">
 </form>
 <a href="{% url 'home' %}">back</a>
