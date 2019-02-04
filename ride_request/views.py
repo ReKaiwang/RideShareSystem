@@ -11,7 +11,7 @@ def chosed_ride(request):
     if request.method == 'POST':
         oneride = request.POST
         oneride_id = oneride['choice']
-        ride = ride_request.objects.get(id=1)
+        ride = ride_request.objects.get(id=oneride_id)
         curr = CustomUser.objects.get(username=request.user.username)
         ride.user.add(curr)
         ride.save()

@@ -39,7 +39,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'users.apps.UsersConfig',
-    'ride_request'
+    'ride_request',
+    'driver'
 ]
 
 MIDDLEWARE = [

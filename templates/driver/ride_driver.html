@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ride for Driver</title>
+</head>
+<body>
+    {% if user.is_authenticated %}
+    <p >Open Ride Shows Below:</p>
+    <form  method="POST">
+        {% csrf_token %}
+        <table border="1">
+        <tr>
+            <th>Arrive Time</th>
+            <th>Destination</th>
+            <th>Passage Number</th>
+            <th>Choice</th>
+        </tr>
+        {% for ride in list %}
+       <tr>
+           <td>{{ride.arriveTime}}</td>
+           <td>{{ride.Destination}}</td>
+           <td>{{ride.PassageNum}} </td>
+           <td><input type="radio", name="choice" value={{ride.id}} ,required oninvalid="alert('Must choice one ride!')"/>
+       </tr>
+            {% endfor %}
+        </table>
+        <!--<input type="button" value="Choose Ride">-->
+        <button>Choose Ride</button>
+    </form>
+</body>
+ {% else %}
+      <p>You are not logged in</p>
+      <a href="{% url 'login' %}">login</a> |
+      <a href="{% url 'signup' %}">signup</a>
+    {% endif %}
+</html>
