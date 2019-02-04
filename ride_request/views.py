@@ -32,9 +32,10 @@ def new_ride_request(request):
         #print(form)
         if form.is_valid():
             Comform = form.save(commit = False)
-            curr=CustomUser.objects.get(username=request.user.username)
-            Comform.user = curr
             Comform.save()
+            curr=CustomUser.objects.get(username=request.user.username)
+            Comform.user.add(curr)
+           # Comform.save()
             form.save(commit=True)
             list=curr.ride_request_set.all()
             return render(request,'ride_request/status_view.html',context={"list":list})

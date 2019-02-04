@@ -5,7 +5,7 @@
     <title>Sharelist</title>
 </head>
 <body>
-    {% if user.is_authenticated %}
+  <!--  {% if user.is_authenticated %}-->
      <p >Valid Share Ride Shows Below:</p>
     <form action = "{% url 'ridelist' %}" name = 'Status', method="POST">
         {% csrf_token %}
@@ -34,9 +34,9 @@
     </form>
      <a href="{% url 'shareride' %}">Change Search Option</a>
 </body>
-    {% else %}
+   <!--  {% else %}
       <p>You are not logged in</p>
       <a href="{% url 'login' %}">login</a> |
       <a href="{% url 'signup' %}">signup</a>
-    {% endif %}
+    {% endif %} -->
 </html>
