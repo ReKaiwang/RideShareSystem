@@ -2,6 +2,8 @@
 from django.urls import reverse_lazy
 from django.views import generic
 from django.shortcuts import render
+from django.core.mail import send_mail
+from django.conf import settings
 
 from .forms import CustomUserCreationForm
 from .forms import CustomUserChangeForm
@@ -37,8 +39,14 @@ def Modify(request):
             temp.plate_number = newStatus['plate_number']
             temp.maximum_number_of_passengers = newStatus['maximum_number_of_passengers']
             temp.special_vehicle_info = newStatus['special_vehicle_info']
+            subject='Confirm your ride'
+            message='Hi '+request.user.username+' your ride has been claimed.'
+            receiver=['zhzheng27@gmail.com']
+            send_mail(subject, message, settings.EMAIL_HOST_USER,
+                      receiver,)
 
             temp.save()
+
             return render(request,'modify.html',context={"form": form})
         else:
             print("wrong form")
