@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ride Status</title>
+</head>
+<body>
+{% if user.is_authenticated %}
+    <p >Your ride's status shows below:</p>
+    <form method="POST">
+        {% csrf_token %}
+        <table border="1">
+        <tr>
+            <th>Arrive Time</th>
+            <th>Destination</th>
+            <th>Passage Number</th>
+            <th>Ride Status</th>
+            <th>Finish The Ride</th>
+        </tr>
+      {% for ride in list %}
+       <tr>
+           <td>{{ride.arriveTime}}</td>
+           <td>{{ride.Destination}}</td>
+           <td>{{ride.PassageNum}} </td>
+           <td>{{ride.ride_status}}</td>
+           <td><input type="radio", name="finish" value={{ride.id}} >
+           </td>
+       </tr>
+            {% endfor %}
+        </table>
+        <button>Confirm Choice</button>
+    </form>
+
+<a href="{% url 'home' %}">back</a>
+    {% else %}
+      <p>You are not logged in</p>
+      <a href="{% url 'login' %}">login</a> |
+      <a href="{% url 'signup' %}">signup</a>
+    {% endif %}
+</body>
+</html>

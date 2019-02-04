@@ -10,8 +10,15 @@ def index(request):
 def chosed_ride(request):
     if request.method == 'POST':
         oneride = request.POST
-        print(oneride)
-    return render(request, 'ride_request/ride_share_request.html')
+        oneride_id = oneride['choice']
+        ride = ride_request.objects.get(id=oneride_id)
+        curr = CustomUser.objects.get(username=request.user.username)
+        ride.user.add(curr)
+        ride.save()
+        owner = CustomUser.objects.get(username=request.user.username)
+        list = owner.ride_request_set.all()
+        return render(request, 'ride_request/status_view.html',context={'list':list})
+    return render(request, 'ride_request/status_view.html' )
 def share_ride_request(request):
     if request.method == 'POST':
         oneride = request.POST
