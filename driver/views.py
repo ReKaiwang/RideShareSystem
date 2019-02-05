@@ -34,5 +34,6 @@ def ride_view(request):
         ride.save()
         owner = CustomUser.objects.get(username=request.user.username)
         list = owner.ride_request_set.all()
+        #print('YES')
         return render(request, 'driver/status_view.html', context={'list': list})
     return render(request, 'driver/status_view.html', context=context)

@@ -7,7 +7,7 @@
 <body>
     {% if user.is_authenticated %}
     <p >Your ride's status shows below:</p>
-    <form name = 'Status', method="POST">
+    <form name = 'Status', method="POST", action="{% url 'ridestatus' %}">
         {% csrf_token %}
         <table border="1">
         <tr>

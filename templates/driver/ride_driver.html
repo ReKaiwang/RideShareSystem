@@ -7,7 +7,7 @@
 <body>
     {% if user.is_authenticated %}
     <p >Open Ride Shows Below:</p>
-    <form  method="POST">
+    <form name = 'find' method="POST" action="{% url 'findride' %}">
         {% csrf_token %}
         <table border="1">
         <tr>
