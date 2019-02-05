@@ -5,31 +5,81 @@
 
 {% block content %}
 <h2>Modify</h2>
+
 <form method="post">
   {% csrf_token %}
   <ul border="1">
 
 
-           <li><input type = "email ", name = "email", value="{{usr.email}}"></li>
-           <li><input type = "text", name = "driver", value="{{usr.driver}}", list="dri-list"></li>
-            <datalist id = 'dri-list'>
-                <option>yes</option>
-                <option>no</option>
+           <li>Email: <input type = "email ", name = "email", value="{{usr.email}}"></li>
+           <li>
+               Driver:
+                 {% if usr.driver == "n" %}
+               <input type = "text", name = "driver", value= No , list="becomedri">
+                {% else %}
+                <input type = "text", name = "driver", value= Yes , list="becomedri">
+               {% endif %}
+           </li>
+            <datalist id = "becomedri">
+                <option value="n">No</option>
+                <option value="y">Yes</option>
             </datalist>
-           <li><input type = "text", name = "vehicle_brand", value="{{usr.vehicle_brand}}", list = "vehi-list"> </li>
-            <datalist id = "vehi-list">
-                <option>volvo</option>
-                <option>audi</option>
-                <option>mercedes</option>
-                <option>toyota</option>
-                <option>honda</option>
-                <option>nissan</option>
-                <option>other</option>
-            </datalist>
-            <li><input type = "text", name = "plate_number", value="{{usr.plate_number}}"></>
-            <li><input type = "number ", name = "plate_number", value="{{usr.plate_number}}"></li>
-            <li><input type = "text", name = "special_vehicle_info", value="{{usr.special_vehicle_info}}", list="dri-list"></li>
 
+            <li> Vehicle Type:
+                {% if usr.vehicle_brand == "v" %}
+        <input type = "text", name = "vehicle_brand", value=Volvo list="veh-list">
+{% else %}
+    {% if usr.vehicle_brand == "m" %}
+         <input type = "text", name = "vehicle_brand", value=Mercedes list="veh-list">
+        {% else %}
+            {% if usr.vehicle_brand == "t" %}
+                <input type = "text", name = "vehicle_brand", value=Toyota list="veh-list">
+            {% else %}
+                 {% if usr.vehicle_brand == "a" %}
+                   <input type = "text", name = "vehicle_brand", value=Audi list="veh-list">
+                 {% else %}
+                    {% if usr.vehicle_brand == "h" %}
+                        <input type = "text", name = "vehicle_brand", value=Honda list="veh-list">
+                    {% else %}
+                        {% if usr.vehicle_brand == "n" %}
+                            <input type = "text", name = "vehicle_brand", value=Nissan list="veh-list">
+                        {% else %}
+                            <input type = "text", name = "vehicle_brand", value=Other list="veh-list">
+                        {%endif%}
+                    {%endif%}
+                {%endif%}
+            {%endif%}
+        {%endif%}
+    {%endif%}
+            <datalist id="veh-list">
+                <option value ="v">Volvo</option>
+                <option value ="m">Mercedes</option>
+                <option value="t">Toyota</option>
+                <option value="a">Audi</option>
+                <option value="h">Honda</option>
+                <option value="n">Nissan</option>
+                <option value="o">Other</option>
+                </datalist>
+            </li>
+
+            <li>Plate Number:<input type = "number ", name = "plate_number", value="{{usr.plate_number}}"></li>
+            <li>maximum number of passengers:<input type = "number ", name = "maximum_number_of_passengers", value="{{usr.maximum_number_of_passengers}}"></li>
+            <li>Special Vehicle Info:
+        {% if usr.special_vehicle_info == "b" %}
+            <input type = "text", name = "special_vehicle_info", value=Big list="dri-list">
+        {% else %}
+            {% if usr.special_vehicle_info == "s" %}
+             <input type = "text", name = "special_vehicle_info", value=Small list="dri-list">
+            {% else %}
+                 <input type = "text", name = "special_vehicle_info", value=Large list="dri-list">
+                {% endif %}
+        {% endif %}
+            </li>
+            <datalist id = "dri-list">
+                <option value="b">Big</option>
+                <option value="m">Medium</option>
+                <option value="l">Large</option>
+            </datalist>
 
 
             </ul>
