@@ -5,7 +5,7 @@ from ride_request.models import ride_request
 class NewRide(forms.ModelForm):
     class Meta:
         model = ride_request
-        exclude = ['user']
+        exclude = ['user','ride_status']
         #fields = '__all__'
 
 class ComRide(forms.ModelForm):

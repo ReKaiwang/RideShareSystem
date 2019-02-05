@@ -19,6 +19,7 @@ STATUS_TYPE = [
     ('F', 'Finished')
 
 ]
+
 class ride_request(models.Model):
     #user= models.ForeignKey(CustomUser,on_delete=models.CASCADE,)
     user = models.ManyToManyField(

@@ -3,6 +3,8 @@ from ride_request.forms import NewRide,searchRide,ComRide
 from ride_request.models import ride_request
 from users.models import CustomUser
 from datetime import datetime
+from django.core.mail import send_mail
+from django.conf import settings
 # Create your views here.
 def find_ride(request):
     list = ride_request.objects.filter(ride_status__contains = 'O')
@@ -18,6 +20,18 @@ def find_ride(request):
         ride.save()
         owner = CustomUser.objects.get(username=request.user.username)
         list = owner.ride_request_set.filter(ride_status__contains = 'C')
+
+        subject = 'Confirm your ride'
+        owner=ride.user.all()
+        #receiver=[]
+        for i in owner:
+            receiver=[]
+            receiver.append(i.email)
+            message = 'Hi ' + i.username + ' your ride to ' + ride.Destination+' at '+ ride.arriveTime + ' has been claimed.'
+            send_mail(subject, message, settings.EMAIL_HOST_USER,
+                      receiver, )
+
+
         return render(request, 'driver/status_view.html',context={'list':list} )
     return render(request, 'driver/ride_driver.html',context=context )
 
