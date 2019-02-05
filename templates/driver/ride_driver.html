@@ -26,12 +26,13 @@
             {% endfor %}
         </table>
         <!--<input type="button" value="Choose Ride">-->
-        <button>Choose Ride</button>
+        <button>Choose Ride</button><br><br>
     </form>
+        <a href="{% url 'home' %}">back</a>
 </body>
  {% else %}
       <p>You are not logged in</p>
-      <a href="{% url 'login' %}">login</a> |
+      <a href="{% url 'login' %}">login</a>
       <a href="{% url 'signup' %}">signup</a>
     {% endif %}
 </html>

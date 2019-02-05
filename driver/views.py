@@ -22,6 +22,7 @@ def find_ride(request):
         list = owner.ride_request_set.filter(ride_status__contains = 'C')
 
         subject = 'Confirm your ride'
+        # need exclude the driver
         owner=ride.user.all()
         #receiver=[]
         for i in owner:
