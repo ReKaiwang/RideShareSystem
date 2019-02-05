@@ -9,11 +9,11 @@
 <h1>Enter your Ride Share Request </h1>
     <form method="POST">
         {% csrf_token %}
-        <br>Arrive Time:<input type="time", name="begin"/>~<input type="time", name="end"/></br>
-        <br>Destination:<input type="text", name="Destination"/> </br>
-        <br>Passage Number:<input type="text", name="PassgeN"/> </br>
-        <br>Vehicle Type:<input type="text", name="Vehiclet"/> </br>
-        <br>Other Request:<input type="text", name="OtherRe"/> </br>
+        <br>Arrive Time:<input type="time", name="begin" placeholder="xx:yy" required/>~<input type="time", name="end" placeholder="xx:yy" required/></br>
+        <br>Destination:<input type="text", name="Destination" placeholder="Required" required/> </br>
+        <br>Passage Number:<input type="text", name="PassgeN" placeholder="Required" required/> </br>
+        <br>Vehicle Type:<input type="text", name="Vehiclet" placeholder="Option"/> </br>
+        <br>Other Request:<input type="text", name="OtherRe" placeholder="Option"/> </br>
         <input type="submit" value="Search">
     </form>
     {% else %}

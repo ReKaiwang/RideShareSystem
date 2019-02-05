@@ -17,7 +17,7 @@ def find_ride(request):
         ride.user.add(curr)
         ride.save()
         owner = CustomUser.objects.get(username=request.user.username)
-        list = owner.ride_request_set.all()
+        list = owner.ride_request_set.filter(ride_status__contains = 'C')
         return render(request, 'driver/status_view.html',context={'list':list} )
     return render(request, 'driver/ride_driver.html',context=context )
 
@@ -33,7 +33,7 @@ def ride_view(request):
         ride.ride_status = 'F'
         ride.save()
         owner = CustomUser.objects.get(username=request.user.username)
-        list = owner.ride_request_set.all()
+        list = owner.ride_request_set.filter(ride_status__contains = 'C')
         #print('YES')
         return render(request, 'driver/status_view.html', context={'list': list})
     return render(request, 'driver/status_view.html', context=context)
