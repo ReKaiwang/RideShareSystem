@@ -29,7 +29,9 @@
        </tr>
             {% endfor %}
         </table>
+        <input type="hidden", name="sharenum", value="{{number}}">
         <!--<input type="button" value="Choose Ride">-->
+
         <button>Choose Ride</button>
     </form>
      <a href="{% url 'shareride' %}">Change Search Option</a>

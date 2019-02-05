@@ -33,26 +33,25 @@ def Modify(request):
         #print(form)
         #['email','driver','vehicle_brand','plate_number'
         #    ,'maximum_number_of_passengers','special_vehicle_info']
-        if form.is_valid():
-            newStatus = request.POST
-            temp = CustomUser.objects.get(username=request.user.username)
-            temp.email=newStatus['email']
-            temp.driver=newStatus['driver']
-            temp.vehicle_brand = newStatus['vehicle_brand']
-            temp.plate_number = newStatus['plate_number']
-            temp.maximum_number_of_passengers = newStatus['maximum_number_of_passengers']
-            temp.special_vehicle_info = newStatus['special_vehicle_info']
-            # subject='Confirm your ride'
-            # message='Hi '+request.user.username+' your ride has been claimed.'
-            # receiver=['zhzheng27@gmail.com']
-            # send_mail(subject, message, settings.EMAIL_HOST_USER,
-            #           receiver,)
+        newStatus = request.POST
+        receiver =[]
+        temp = CustomUser.objects.get(username=request.user.username)
+        temp.email = newStatus['email']
+        temp.driver = newStatus['driver']
+        temp.vehicle_brand = newStatus['vehicle_brand']
+        temp.plate_number = newStatus['plate_number']
+        temp.maximum_number_of_passengers = newStatus['maximum_number_of_passengers']
+        temp.special_vehicle_info = newStatus['special_vehicle_info']
+        subject = 'Change Profile'
+        message = 'Hi ' + request.user.username + ' your profile has been changed.'
+        receiver.append(temp.email)
+        send_mail(subject, message, settings.EMAIL_HOST_USER,
+                  receiver, )
 
-            temp.save()
+        temp.save()
 
-            return render(request,'modify.html',context={"form": form})
-        else:
-            print("wrong form")
+        list = CustomUser.objects.get(username=request.user.username)
+        return render(request, 'modify.html', context={"usr": list})
     return render(request, 'modify.html',context=context)
 
 

@@ -19,19 +19,23 @@ STATUS_TYPE = [
     ('F', 'Finished')
 
 ]
-
+SIZE = (
+    ('b', 'big'),
+    ('m', 'medium'),
+    ('l', 'large')
+)
 class ride_request(models.Model):
     #user= models.ForeignKey(CustomUser,on_delete=models.CASCADE,)
     user = models.ManyToManyField(
         settings.AUTH_USER_MODEL)
     #owner=models.CharField(max_length=256,blank=True)
     #arriveTime = models.TimeField(blank = False)
-    arriveTime = models.CharField(blank=False, max_length=256, help_text="Time form: xx:xx p.m/a.m")
+    arriveTime = models.CharField(blank=False, max_length=256, help_text="Time Form: xx:xx ")
     Destination = models.CharField(max_length = 256, blank = False)
     PassageNum = models.PositiveSmallIntegerField(blank = False,verbose_name="Passger Number")
-    Vehicle_type = models.CharField(max_length = 256, blank = True, choices =VEHCILE_TYPE)
+    Vehicle_type = models.CharField(max_length = 256, blank = True, choices =VEHCILE_TYPE, help_text="Optional")
     Share = models.BooleanField(blank = False)
-    Other_request = models.CharField(max_length = 256, blank =True)
+    Other_request = models.CharField(max_length = 256, blank =True, help_text="Optional", choices=SIZE)
     ride_status = models.CharField(max_length = 200, blank = True, default = 'O', choices = STATUS_TYPE)
 
     def __str__(self):

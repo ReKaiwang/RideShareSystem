@@ -12,6 +12,7 @@ def chosed_ride(request):
         oneride = request.POST
         oneride_id = oneride['choice']
         ride = ride_request.objects.get(id=oneride_id)
+        ride.PassageNum = ride.PassageNum+int(oneride['sharenum'])
         curr = CustomUser.objects.get(username=request.user.username)
         ride.user.add(curr)
         ride.save()
@@ -22,12 +23,12 @@ def chosed_ride(request):
 def share_ride_request(request):
     if request.method == 'POST':
         oneride = request.POST
-        ride_list_all = ride_request.objects.filter(Destination__contains = oneride['Destination'])
+        ride_list_all = ride_request.objects.filter(Destination__contains = oneride['Destination'], ride_status = 'O')
         ride_list = []
         for q in ride_list_all:
             if str(q.arriveTime) >= oneride['begin'] and str(q.arriveTime) <= oneride['end']:
                 ride_list.append(q)
-        return render(request, 'ride_request/sharelist.html', context = {'list':ride_list})
+        return render(request, 'ride_request/sharelist.html', context = {'list':ride_list, 'number':oneride['PassgeN']})
     return render(request, 'ride_request/ride_share_request.html')
 
 def new_ride_request(request):

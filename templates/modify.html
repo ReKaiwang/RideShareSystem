@@ -11,13 +11,13 @@
   <ul border="1">
 
 
-           <li>Email: <input type = "email ", name = "email", value="{{usr.email}}"></li>
+           <li>Email: <input type = "email ", name = "email", value="{{usr.email}}" required></li>
            <li>
                Driver:
                  {% if usr.driver == "n" %}
-               <input type = "text", name = "driver", value= No , list="becomedri">
+               <input type = "text", name = "driver", value= No , list="becomedri" required>
                 {% else %}
-                <input type = "text", name = "driver", value= Yes , list="becomedri">
+                <input type = "text", name = "driver", value= Yes , list="becomedri" required>
                {% endif %}
            </li>
             <datalist id = "becomedri">
