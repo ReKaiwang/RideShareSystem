@@ -37,7 +37,11 @@ class ride_request(models.Model):
     Share = models.BooleanField(blank = False)
     Other_request = models.CharField(max_length = 256, blank =True, help_text="Optional", choices=SIZE)
     ride_status = models.CharField(max_length = 200, blank = True, default = 'O', choices = STATUS_TYPE)
-
+    driver=models.CharField(max_length= 200,blank=True)
+    vehicle=models.CharField(max_length= 200,blank=True)
+    capacity=models.IntegerField(blank=True,null=True)
+    plate=models.CharField(max_length= 200,blank=True)
+    info=models.CharField(max_length= 200,blank=True)
     def __str__(self):
         return self.Destination
 

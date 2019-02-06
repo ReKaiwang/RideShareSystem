@@ -15,6 +15,11 @@
             <th>Destination</th>
             <th>Passage Number</th>
             <th>Ride Status</th>
+            <th>Driver</th>
+            <th>Vehicle</th>
+            <th>Capacity</th>
+            <th>Plate number</th>
+            <th>Special Info</th>
         </tr>
       {% for ride in list %}
        <tr>
@@ -31,6 +36,11 @@
 
            {%endif%}
             {%endif%}
+           <td> {{ride.driver}} </td>
+           <td> {{ride.vehicle}} </td>
+           <td> {{ride.capacity}}</td>
+           <td> {{ride.plate}} </td>
+           <td> {{ride.info}} </td>
 
        </tr>
              {% endfor %}

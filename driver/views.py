@@ -7,7 +7,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 # Create your views here.
 def find_ride(request):
-    list = ride_request.objects.filter(ride_status__contains = 'O')
+    list = ride_request.objects.filter(ride_status__contains = 'O', Vehicle_type = 'request.user.vehicle_brand')
     context = {
         'list': list
     }
@@ -20,7 +20,12 @@ def find_ride(request):
         ride.save()
         owner = CustomUser.objects.get(username=request.user.username)
         list = owner.ride_request_set.filter(ride_status__contains = 'C')
-
+        ride.driver=request.user.username
+        ride.vehicle=request.user.vehicle_brand
+        ride.capacity=request.user.maximum_number_of_passengers
+        ride.plate=request.user.plate_number
+        ride.info=request.user.special_vehicle_info
+        ride.save()
         subject = 'Confirm your ride'
         # need exclude the driver
         owner=ride.user.all()
