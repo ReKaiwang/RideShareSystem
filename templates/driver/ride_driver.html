@@ -6,6 +6,7 @@
 </head>
 <body>
     {% if user.is_authenticated %}
+     {% if user.driver == 'y'%}
     <p >Open Ride Shows Below:</p>
     <form name = 'find' method="POST" action="{% url 'findride' %}">
         {% csrf_token %}
@@ -30,6 +31,10 @@
     </form>
         <a href="{% url 'home' %}">back</a>
 </body>
+    {% else %}
+    <p> you are not a driver! Become a driver by modifying your profile</p><br>
+    <a href="{% url 'home' %}">back</a>
+        {% endif %}
  {% else %}
       <p>You are not logged in</p>
       <a href="{% url 'login' %}">login</a>
