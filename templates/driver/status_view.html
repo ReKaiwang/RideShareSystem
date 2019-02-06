@@ -6,6 +6,7 @@
 </head>
 <body>
 {% if user.is_authenticated %}
+ {% if user.driver == "y"%}
     <p >Your ride's status shows below:</p>
     <form name = 'riderstatus' method="POST" action="{% url 'drivestatus' %}">
         {% csrf_token %}
@@ -16,6 +17,7 @@
             <th>Passage Number</th>
             <th>Ride Status</th>
             <th>Finish The Ride</th>
+            <th>Riders</th>
         </tr>
       {% for ride in list %}
        <tr>
@@ -25,12 +27,20 @@
            <td>{{ride.ride_status}}</td>
            <td><input type="radio", name="finish" value={{ride.id}} >
            </td>
+                       <td>   {%for user in ride.rider_pair_set.all%}
+                           <li>---------------------</li>
+                           <li> user: {{ user.username}}</li>
+                           <li>number of passenger: {{user.number}}</li>
+               {%endfor%}</td>
        </tr>
-            {% endfor %}
+        {% endfor %}
         </table>
+
         <button>Confirm Choice</button>
     </form>
-
+    {%else%}
+    <p> you are not a driver! Become a driver by modifying your profile</p><br>
+        {% endif %}
 <a href="{% url 'home' %}">back</a>
     {% else %}
       <p>You are not logged in</p>

@@ -64,5 +64,10 @@ def ride_view(request):
         owner = CustomUser.objects.get(username=request.user.username)
         list = owner.ride_request_set.filter(ride_status__contains = 'C')
         #print('YES')
+        print(ride.rider_pair_set)
+        # userlist=[]
+        # for i in list:
+        #     userlist.append(i.ride_request_set.all())
+        #     print(i.ride_request_set.all()[0].user)
         return render(request, 'driver/status_view.html', context={'list': list})
     return render(request, 'driver/status_view.html', context=context)

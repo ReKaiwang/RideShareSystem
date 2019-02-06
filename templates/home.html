@@ -2,24 +2,42 @@
 {% extends 'base.html' %}
 
 {% block title %}Home{% endblock %}
-
+{% load static %}
+<link rel="stylesheet" type = "text/css" href="{%static 'users/home.css' %}">
 {% block content %}
 {% if user.is_authenticated %}
   Hi {{ user.username }}!
-  <p><a href="{% url 'logout' %}">logout</a></p>
-  <p><a href="{% url 'riderequest'%}"> start a new ride</a></p>
-  <p><a href="{% url 'ridestatus'%}"> view your rides</a></p>
+<div class = "nav">
+  <a href="{% url 'logout' %}">logout      </a><br>
+  <a href="{% url 'riderequest'%}"> start a new ride     </a>
+  <a href="{% url 'ridestatus'%}"> view your rides     </a>
   <a href="{% url 'modify' %}">Change your profile</a>
  <!-- <a href="{% url 'shareride' %}">Find a existing ride</a>-->
   <br>as a driver: <br>
-  <p><a href="{% url 'findride' %}">Find a existing ride</a></p>
-<p><a href="{% url 'drivestatus' %}">View Your Rides</a></p>
+ <a href="{% url 'findride' %}">Find a existing ride</a>
+<a href="{% url 'drivestatus' %}">View Your Rides</a>
+</div>
   <!--<p><a href="{% url 'ridestatus'%}"> view your rides</a></p>-->
 
 
 {% else %}
-  <p>You are not logged in</p>
-  <a href="{% url 'login' %}">login</a> |
+<style type="text/css">
+#txt{
+ bottom:0px;
+ text-align:center;
+ position:relative
+
+}
+</style>
+
+
+  <!--<p align="center">You are not logged in</p>-->
+
+
+<div id=txt>
+    <a href="{% url 'login' %}">login</a>
   <a href="{% url 'signup' %}">signup</a>
+<p>You are not logged in</p>
+</div>
 {% endif %}
 {% endblock %}

@@ -48,3 +48,9 @@ class ride_request(models.Model):
     def get_absolute_url(self):
         """Returns the url to access a particular instance of the model."""
         return reverse('model-detail-view', args=[str(self.id)])
+
+#weddddddddddddddd
+class rider_pair(models.Model):
+    username=models.CharField(max_length=200,blank=True)
+    number=models.IntegerField(blank=True,null=True)
+    ride=models.ForeignKey(ride_request,on_delete= models.CASCADE,)

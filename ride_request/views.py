@@ -15,6 +15,7 @@ def chosed_ride(request):
         ride.PassageNum = ride.PassageNum+int(oneride['sharenum'])
         curr = CustomUser.objects.get(username=request.user.username)
         ride.user.add(curr)
+        ride.rider_pair_set.create(username=request.user.username,number=int(oneride['sharenum']))
         ride.save()
         owner = CustomUser.objects.get(username=request.user.username)
         list = owner.ride_request_set.all()
@@ -45,6 +46,8 @@ def new_ride_request(request):
             Comform.user.add(curr)
            # Comform.save()
             form.save(commit=True)
+            Comform.rider_pair_set.create(username=request.user.username,number=Comform.PassageNum,)
+            print(Comform.rider_pair_set.all())
             list=curr.ride_request_set.all()
             return render(request,'ride_request/status_view.html',context={"list":list})
         else:
