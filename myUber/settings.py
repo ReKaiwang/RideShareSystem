@@ -26,7 +26,7 @@ SECRET_KEY = '^0ao4(3^xyu_spi-kl31n&ae2aa-2u6gb+d==)^gok($6(z_m^'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['vcm-7828.vm.duke.edu',]
 
 
 # Application definition
@@ -79,8 +79,12 @@ WSGI_APPLICATION = 'myUber.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'myuber',
+        'USER': 'zz165',
+        'PASSWORD': 'programmer',
+        'HOST': '127.0.0.1',
+        'PORT': '5432',
     }
 }
 
