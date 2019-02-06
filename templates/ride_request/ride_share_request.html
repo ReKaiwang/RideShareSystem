@@ -12,7 +12,19 @@ background-image:url(https://media.giphy.com/media/Fe22CajsYBJio/giphy.gif);
 
      background-size:cover;
 }
-
+.button {
+    background-color: rgb(238,112,107);
+    border: none;
+    color: rgb(209,253,240);
+    padding: 8px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 3px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+    }
 
 </style>
 {% if user.is_authenticated %}
@@ -24,9 +36,11 @@ background-image:url(https://media.giphy.com/media/Fe22CajsYBJio/giphy.gif);
         <br>Passage Number:<input type="text", name="PassgeN" placeholder="Required" required/> </br>
         <br>Vehicle Type:<input type="text", name="Vehiclet" placeholder="Option"/> </br>
         <br>Other Request:<input type="text", name="OtherRe" placeholder="Option"/> </br>
-        <input type="submit" value="Search">
+        <input class="button" type="submit" value="Search">
     </form>
-        <a href="{% url 'riderequest' %}">back</a><br>
+<br />
+<br />
+        <a href="{% url 'riderequest' %}">Back</a><br>
         <a href="{% url 'logout' %}">Logout</a>
     {% else %}
       <p>You are not logged in</p>

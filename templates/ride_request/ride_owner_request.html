@@ -12,6 +12,19 @@ background-image:url(https://media.giphy.com/media/Fe22CajsYBJio/giphy.gif);
 
      background-size:cover;
 }
+.button {
+    background-color: rgb(238,112,107);
+    border: none;
+    color: rgb(209,253,240);
+    padding: 8px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 3px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+    }
 
 
 </style>
@@ -20,11 +33,11 @@ background-image:url(https://media.giphy.com/media/Fe22CajsYBJio/giphy.gif);
     <form method="POST">
         {{form.as_p}}
         {% csrf_token %}
-        <input type="submit" value="Submit">
+        <input class="button" type="submit" value="Submit">
     </form>
 
         <a href="{% url 'shareride' %}">Share a Ride?</a><br><br><br>
-        <a href="{% url 'home' %}">back</a><br>
+        <a href="{% url 'home' %}">Back</a><br>
         <a href="{% url 'logout' %}">Logout</a>
     </div>
     {% else %}

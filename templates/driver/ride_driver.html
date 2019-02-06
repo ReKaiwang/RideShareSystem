@@ -4,6 +4,28 @@
     <meta charset="UTF-8">
     <title>Ride for Driver</title>
 </head>
+<style>
+body {
+background-image:url(https://media.giphy.com/media/Fe22CajsYBJio/giphy.gif);
+
+     background-size:cover;
+     }
+.button {
+    background-color: rgb(238,112,107);
+    border: none;
+    color: rgb(209,253,240);
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 8px;
+    margin: 3px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+
+}
+
+</style>
 <body>
     {% if user.is_authenticated %}
      {% if user.driver == "y"%}
@@ -27,13 +49,17 @@
             {% endfor %}
         </table>
         <!--<input type="button" value="Choose Ride">-->
-        <button>Choose Ride</button><br><br>
+        <button class="button">Choose Ride</button><br><br>
     </form>
-        <a href="{% url 'home' %}">back</a>
+    </br>
+</br>
+        <a href="{% url 'home' %}">Back</a>
 </body>
     {% else %}
-    <p> you are not a driver! Become a driver by modifying your profile</p><br>
-    <a href="{% url 'home' %}">back</a>
+    <p> you are not a driver! Become a driver by modifying your profile</p>
+</br>
+</br>
+    <a href="{% url 'home' %}">Back</a>
         {% endif %}
  {% else %}
       <p>You are not logged in</p>

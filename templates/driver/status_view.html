@@ -4,9 +4,30 @@
     <meta charset="UTF-8">
     <title>Ride Status</title>
 </head>
-<body>
+<style>
+body {
+background-image:url(https://media.giphy.com/media/Fe22CajsYBJio/giphy.gif);
+
+     background-size:cover;
+     }
+.button {
+    background-color: rgb(238,112,107);
+    border: none;
+    color: rgb(209,253,240);
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 8px;
+    margin: 3px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+
+}
+
+</style>
 {% if user.is_authenticated %}
- {% if user.driver == "y"%}
+   {% if user.driver == "y"%}
     <p >Your ride's status shows below:</p>
     <form name = 'riderstatus' method="POST" action="{% url 'drivestatus' %}">
         {% csrf_token %}
@@ -17,7 +38,6 @@
             <th>Passage Number</th>
             <th>Ride Status</th>
             <th>Finish The Ride</th>
-            <th>Riders</th>
         </tr>
       {% for ride in list %}
        <tr>
@@ -27,21 +47,17 @@
            <td>{{ride.ride_status}}</td>
            <td><input type="radio", name="finish" value={{ride.id}} >
            </td>
-                       <td>   {%for user in ride.rider_pair_set.all%}
-                           <li>---------------------</li>
-                           <li> user: {{ user.username}}</li>
-                           <li>number of passenger: {{user.number}}</li>
-               {%endfor%}</td>
        </tr>
-        {% endfor %}
+            {% endfor %}
         </table>
-
-        <button>Confirm Choice</button>
+        <button class="button">Confirm Choice</button>
     </form>
-    {%else%}
+{% else %}
     <p> you are not a driver! Become a driver by modifying your profile</p><br>
         {% endif %}
-<a href="{% url 'home' %}">back</a>
+</br>
+</br>
+<a href="{% url 'home' %}">Back</a>
     {% else %}
       <p>You are not logged in</p>
       <a href="{% url 'login' %}">login</a> |
