@@ -6,7 +6,7 @@
 </head>
 <body>
     {% if user.is_authenticated %}
-     {% if user.driver == 'y'%}
+     {% if user.driver == "y"%}
     <p >Open Ride Shows Below:</p>
     <form name = 'find' method="POST" action="{% url 'findride' %}">
         {% csrf_token %}
