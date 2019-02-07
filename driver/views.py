@@ -7,7 +7,7 @@ from django.core.mail import send_mail
 from django.conf import settings
 # Create your views here.
 def find_ride(request):
-    list = ride_request.objects.filter(ride_status__contains = 'O', Vehicle_type = request.user.vehicle_brand)
+    list = ride_request.objects.filter(ride_status__contains = 'O')
     ride_list = []
     # print(list)
     for q in list:
