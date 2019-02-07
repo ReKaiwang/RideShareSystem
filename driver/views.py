@@ -15,10 +15,11 @@ def find_ride(request):
         if q.PassageNum <= request.user.maximum_number_of_passengers:
          #   print(q)
             ride_list.append(q)
-
+    number = len(ride_list)
     #print(ride_list)
     context = {
-        'list': ride_list
+        'list': ride_list,
+        'number': number
     }
     if request.method == 'POST':
         oneride_id = request.POST['choice']
@@ -53,8 +54,11 @@ def find_ride(request):
 def ride_view(request):
     owner = CustomUser.objects.get(username=request.user.username)
     list = owner.ride_request_set.filter(ride_status__contains = 'C')
+    number = len(list)
     context = {
-        'list': list
+        'list': list,
+        'number': number
+
     }
     if request.method == 'POST':
         oneride_id = request.POST['finish']

@@ -30,7 +30,7 @@ class ride_request(models.Model):
         settings.AUTH_USER_MODEL)
     #owner=models.CharField(max_length=256,blank=True)
     #arriveTime = models.TimeField(blank = False)
-    arriveTime = models.CharField(blank=False, max_length=256, help_text="Time Form: xx:xx ")
+    arriveTime = models.CharField(blank=False, max_length = 256, help_text="Time Form: xx:xx ")
     Destination = models.CharField(max_length = 256, blank = False)
     PassageNum = models.PositiveSmallIntegerField(blank = False,verbose_name="Passger Number")
     Vehicle_type = models.CharField(max_length = 256, blank = True, choices =VEHCILE_TYPE, help_text="Optional")

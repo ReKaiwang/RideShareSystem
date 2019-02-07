@@ -2,6 +2,8 @@ from django.shortcuts import render
 from ride_request.forms import NewRide,searchRide,ComRide
 from ride_request.models import ride_request
 from users.models import CustomUser
+from django.urls import reverse
+from django import forms
 from datetime import datetime
 # Create your views here.
 
@@ -24,6 +26,8 @@ def chosed_ride(request):
 def share_ride_request(request):
     if request.method == 'POST':
         oneride = request.POST
+        # if (oneride['begin'] < oneride['end']):
+        #     return render(request,"shareride")
         ride_list_all = ride_request.objects.filter(Destination__contains = oneride['Destination'], ride_status = 'O')
         ride_list = []
         for q in ride_list_all:

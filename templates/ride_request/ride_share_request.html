@@ -31,7 +31,7 @@ background-image:url(https://media.giphy.com/media/Fe22CajsYBJio/giphy.gif);
 <h1>Enter your Ride Share Request </h1>
     <form method="POST">
         {% csrf_token %}
-        <br>Arrive Time:<input type="time", name="begin" placeholder="xx:yy" required/>~<input type="time", name="end" placeholder="xx:yy" required/></br>
+        <br>Arrive Time:<input type="text", name="begin" placeholder="xx:yy" required/>~<input type="text", name="end" placeholder="xx:yy" required/></br>
         <br>Destination:<input type="text", name="Destination" placeholder="Required" required/> </br>
         <br>Passage Number:<input type="text", name="PassgeN" placeholder="Required" required/> </br>
         <br>Vehicle Type:<input type="text", name="Vehiclet" placeholder="Option"/> </br>

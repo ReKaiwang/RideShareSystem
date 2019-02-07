@@ -29,6 +29,9 @@ background-image:url(https://media.giphy.com/media/Fe22CajsYBJio/giphy.gif);
 <body>
     {% if user.is_authenticated %}
      {% if user.driver == "y"%}
+    {% if number == 0%}
+        <p>There is no valid ride right now. Please refresh the web or choose back</p>
+    {%else%}
     <p >Open Ride Shows Below:</p>
     <form name = 'find' method="POST" action="{% url 'findride' %}">
         {% csrf_token %}
@@ -53,8 +56,11 @@ background-image:url(https://media.giphy.com/media/Fe22CajsYBJio/giphy.gif);
     </form>
     </br>
 </br>
+    {%endif%}
         <a href="{% url 'home' %}">Back</a>
+
 </body>
+
     {% else %}
     <p> you are not a driver! Become a driver by modifying your profile</p>
 </br>

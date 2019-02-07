@@ -26,8 +26,12 @@ background-image:url(https://media.giphy.com/media/Fe22CajsYBJio/giphy.gif);
 }
 
 </style>
+
 {% if user.is_authenticated %}
    {% if user.driver == "y"%}
+{% if number == 0%}
+        <p>You have no ongoing ride right now. Please refresh the web or choose back</p>
+    {%else%}
     <p >Your ride's status shows below:</p>
     <form name = 'riderstatus' method="POST" action="{% url 'drivestatus' %}">
         {% csrf_token %}
@@ -52,6 +56,7 @@ background-image:url(https://media.giphy.com/media/Fe22CajsYBJio/giphy.gif);
         </table>
         <button class="button">Confirm Choice</button>
     </form>
+{%endif%}
 {% else %}
     <p> you are not a driver! Become a driver by modifying your profile</p><br>
         {% endif %}
