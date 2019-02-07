@@ -85,13 +85,17 @@
             <li>Plate Number:<input type = "number ", name = "plate_number", value="{{usr.plate_number}}"></li>
             <li>maximum number of passengers:<input type = "number ", name = "maximum_number_of_passengers", value="{{usr.maximum_number_of_passengers}}"></li>
             <li>Special Vehicle Info:
-        {% if usr.special_vehicle_info == "b" %}
-            <input type = "text", name = "special_vehicle_info", value=Big list="dri-list">
+        {% if usr.special_vehicle_info == "p" %}
+            <input type = "text", name = "special_vehicle_info", value="pets friendly" list="dri-list">
         {% else %}
             {% if usr.special_vehicle_info == "s" %}
-             <input type = "text", name = "special_vehicle_info", value=Small list="dri-list">
+             <input type = "text", name = "special_vehicle_info", value="smoke free" list="dri-list">
             {% else %}
-                 <input type = "text", name = "special_vehicle_info", value=Large list="dri-list">
+                {% if usr.special_vehicle_info == "w" %}
+                 <input type = "text", name = "special_vehicle_info", value="wheelchair" list="dri-list">
+                {% else %}
+                     <input type = "text", name = "special_vehicle_info", value="provide beverage" list="dri-list">
+                {% endif %}
                 {% endif %}
         {% endif %}
             </li>

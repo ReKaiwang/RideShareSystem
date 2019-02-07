@@ -14,12 +14,13 @@ def find_ride(request):
         # print(q.PassageNum)
         # print(len(q.Other_request))
         # print(len(request.user.special_vehicle_info))
-        if q.PassageNum <= request.user.maximum_number_of_passengers:
-            if len(q.rider_pair_set.filter(username=request.user.username)) == 0:
-             if len(q.Other_request)==0 :
-                 ride_list.append(q)
-             elif q.Other_request == request.user.special_vehicle_info:
-                 ride_list.append(q)
+        if len(q.Vehicle_type) == 0 or q.Vehicle_type == request.user.vehicle_brand:
+            if q.PassageNum <= request.user.maximum_number_of_passengers:
+             if len(q.rider_pair_set.filter(username=request.user.username)) == 0:
+                if len(q.Other_request)==0 :
+                    ride_list.append(q)
+                elif q.Other_request == request.user.special_vehicle_info:
+                    ride_list.append(q)
 
     number = len(ride_list)
     #print(ride_list)

@@ -88,7 +88,7 @@ def view_status(request):
     if request.method == 'POST':
         newStatus = request.POST
         for i in range(0,len(list)):
-            if list[i].ride_status != 'C':
+            if list[i].ride_status == 'O':
                 # print(list[i].arriveTime)
                 # print('YES')
                 # print(list[i].Destination)
