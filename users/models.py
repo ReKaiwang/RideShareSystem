@@ -24,13 +24,14 @@ class CustomUser(AbstractUser):
         ('o','other')
     )
 
-    SIZE=(
-        ('b','big'),
-        ('m','medium'),
-        ('l','large')
+    info=(
+        ('p', 'pets friendly'),
+        ('s', 'smoke free'),
+        ('w', 'wheelchair'),
+        ('b', 'provide beverage')
     )
     username = models.CharField(max_length=150,unique=True,primary_key=False)
-    special_vehicle_info=models.CharField(max_length=20,choices=SIZE,default='b')
+    special_vehicle_info=models.CharField(max_length=20,choices=info,blank=True)
     driver = models.CharField(choices=DRIVER_STATUS,default='n',max_length=2,
                               help_text='want to become a driver? (ignore the following form if you select no)')
     vehicle_brand=models.CharField(choices=VEHICLE,max_length=10,default='o')

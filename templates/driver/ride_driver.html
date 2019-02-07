@@ -54,22 +54,20 @@ background-image:url(https://media.giphy.com/media/Fe22CajsYBJio/giphy.gif);
         <!--<input type="button" value="Choose Ride">-->
         <button class="button">Choose Ride</button><br><br>
     </form>
+     </br>
     </br>
-</br>
     {%endif%}
-        <a href="{% url 'home' %}">Back</a>
-
+        <a href="{% url 'home' %}">back</a>
 </body>
-
     {% else %}
-    <p> you are not a driver! Become a driver by modifying your profile</p>
+    <p> you are not a driver! Become a driver by modifying your profile</p><br>
 </br>
 </br>
     <a href="{% url 'home' %}">Back</a>
         {% endif %}
  {% else %}
       <p>You are not logged in</p>
-      <a href="{% url 'login' %}">login</a>
-      <a href="{% url 'signup' %}">signup</a>
+      <a href="{% url 'login' %}">Login</a>
+      <a href="{% url 'signup' %}">SignUp</a>
     {% endif %}
 </html>

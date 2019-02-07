@@ -33,17 +33,28 @@ background-image:url(https://media.giphy.com/media/Fe22CajsYBJio/giphy.gif);
     <form method="POST">
         {{form.as_p}}
         {% csrf_token %}
-        <input class="button" type="submit" value="Submit">
+        <input type="submit" value="Submit">
     </form>
 
         <a href="{% url 'shareride' %}">Share a Ride?</a><br><br><br>
-        <a href="{% url 'home' %}">Back</a><br>
+        <a href="{% url 'home' %}">back</a><br>
         <a href="{% url 'logout' %}">Logout</a>
     </div>
     {% else %}
-      <p>You are not logged in</p>
-      <a href="{% url 'login' %}">login</a> |
-      <a href="{% url 'signup' %}">signup</a>
+      <style type="text/css">
+#txt{
+ bottom:0px;
+ text-align:center;
+ position:relative
+
+}
+</style>
+
+<div id=txt>
+    <a href="{% url 'login' %}">Login</a> |
+  <a href="{% url 'signup' %}">Signup</a>
+<p>You are not logged in</p>
+</div>
     {% endif %}
 </body>
 </html>

@@ -12,14 +12,20 @@ def find_ride(request):
     # print(list)
     for q in list:
         # print(q.PassageNum)
+        # print(len(q.Other_request))
+        # print(len(request.user.special_vehicle_info))
         if q.PassageNum <= request.user.maximum_number_of_passengers:
-         #   print(q)
-            ride_list.append(q)
+            if len(q.rider_pair_set.filter(username=request.user.username)) == 0:
+             if len(q.Other_request)==0 :
+                 ride_list.append(q)
+             elif q.Other_request == request.user.special_vehicle_info:
+                 ride_list.append(q)
+
     number = len(ride_list)
     #print(ride_list)
     context = {
         'list': ride_list,
-        'number': number
+        'number':number
     }
     if request.method == 'POST':
         oneride_id = request.POST['choice']
@@ -58,7 +64,6 @@ def ride_view(request):
     context = {
         'list': list,
         'number': number
-
     }
     if request.method == 'POST':
         oneride_id = request.POST['finish']
@@ -67,11 +72,12 @@ def ride_view(request):
         ride.save()
         owner = CustomUser.objects.get(username=request.user.username)
         list = owner.ride_request_set.filter(ride_status__contains = 'C')
+        number = len(list)
         #print('YES')
         print(ride.rider_pair_set)
         # userlist=[]
         # for i in list:
         #     userlist.append(i.ride_request_set.all())
         #     print(i.ride_request_set.all()[0].user)
-        return render(request, 'driver/status_view.html', context={'list': list})
+        return render(request, 'driver/status_view.html', context={'list': list, 'number':number})
     return render(request, 'driver/status_view.html', context=context)

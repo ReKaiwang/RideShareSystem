@@ -24,28 +24,42 @@ background-image:url(https://media.giphy.com/media/Fe22CajsYBJio/giphy.gif);
     margin: 3px 2px;
     cursor: pointer;
     border-radius: 12px;
-    }
+    }     ('p', 'pets friendly'),
+        ('s', 'smoke free'),
+        ('w', 'wheelchair'),
+        ('b', 'provide beverage')
 
 </style>
 {% if user.is_authenticated %}
 <h1>Enter your Ride Share Request </h1>
     <form method="POST">
         {% csrf_token %}
-        <br>Arrive Time:<input type="text", name="begin" placeholder="xx:yy" required/>~<input type="text", name="end" placeholder="xx:yy" required/></br>
+        <br>Arrive Time:<input type="time", name="begin" placeholder="xx:yy" required/>~<input type="time", name="end" placeholder="xx:yy" required/></br>
         <br>Destination:<input type="text", name="Destination" placeholder="Required" required/> </br>
         <br>Passage Number:<input type="text", name="PassgeN" placeholder="Required" required/> </br>
-        <br>Vehicle Type:<input type="text", name="Vehiclet" placeholder="Option"/> </br>
-        <br>Other Request:<input type="text", name="OtherRe" placeholder="Option"/> </br>
-        <input class="button" type="submit" value="Search">
+        <br>Vehicle Type:<input type="text", name="Vehiclet" placeholder="Option"/> * v for volvo, m for mercedes, t for toyota, a for audi, h for honda, n for nissan, o for other</br>
+        <br>Other Request:<input type="text", name="OtherRe" placeholder="Option"/> * p for pet friendly, s for smoke free, w for wheelchair, b for provide beverage</br>
+        <input type="submit" value="Search">
     </form>
-<br />
+        <br />
 <br />
         <a href="{% url 'riderequest' %}">Back</a><br>
         <a href="{% url 'logout' %}">Logout</a>
     {% else %}
-      <p>You are not logged in</p>
-      <a href="{% url 'login' %}">login</a> |
-      <a href="{% url 'signup' %}" >signup</a>
+      <style type="text/css">
+#txt{
+ bottom:0px;
+ text-align:center;
+ position:relative
+
+}
+</style>
+
+<div id=txt>
+    <a href="{% url 'login' %}">Login</a> |
+  <a href="{% url 'signup' %}">Signup</a>
+<p>You are not logged in</p>
+</div>
     {% endif %}
 </body>
 </html>

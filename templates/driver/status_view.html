@@ -26,11 +26,11 @@ background-image:url(https://media.giphy.com/media/Fe22CajsYBJio/giphy.gif);
 }
 
 </style>
-
+<body>
 {% if user.is_authenticated %}
-   {% if user.driver == "y"%}
+ {% if user.driver == "y"%}
 {% if number == 0%}
-        <p>You have no ongoing ride right now. Please refresh the web or choose back</p>
+ <p>You have no ongoing ride right now. Please refresh the web or choose back</p>
     {%else%}
     <p >Your ride's status shows below:</p>
     <form name = 'riderstatus' method="POST" action="{% url 'drivestatus' %}">
@@ -42,6 +42,7 @@ background-image:url(https://media.giphy.com/media/Fe22CajsYBJio/giphy.gif);
             <th>Passage Number</th>
             <th>Ride Status</th>
             <th>Finish The Ride</th>
+            <th>Riders</th>
         </tr>
       {% for ride in list %}
        <tr>
@@ -51,13 +52,19 @@ background-image:url(https://media.giphy.com/media/Fe22CajsYBJio/giphy.gif);
            <td>{{ride.ride_status}}</td>
            <td><input type="radio", name="finish" value={{ride.id}} >
            </td>
+                       <td>   {%for user in ride.rider_pair_set.all%}
+                           <li>---------------------</li>
+                           <li> user: {{ user.username}}</li>
+                           <li>number of passenger: {{user.number}}</li>
+               {%endfor%}</td>
        </tr>
-            {% endfor %}
+        {% endfor %}
         </table>
+
         <button class="button">Confirm Choice</button>
     </form>
 {%endif%}
-{% else %}
+    {%else%}
     <p> you are not a driver! Become a driver by modifying your profile</p><br>
         {% endif %}
 </br>
@@ -65,8 +72,8 @@ background-image:url(https://media.giphy.com/media/Fe22CajsYBJio/giphy.gif);
 <a href="{% url 'home' %}">Back</a>
     {% else %}
       <p>You are not logged in</p>
-      <a href="{% url 'login' %}">login</a> |
-      <a href="{% url 'signup' %}">signup</a>
+      <a href="{% url 'login' %}">Login</a> |
+      <a href="{% url 'signup' %}">SignUp</a>
     {% endif %}
 </body>
 </html>

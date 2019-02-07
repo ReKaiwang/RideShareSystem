@@ -3,10 +3,9 @@ from django import forms
 from ride_request.models import ride_request
 
 class NewRide(forms.ModelForm):
-    #arriveTime = forms.TimeField(widget=forms.TimeInput())
     class Meta:
         model = ride_request
-        exclude = ['user','ride_status','driver','vehicle','capacity','plate','info',]
+        exclude = ['user','ride_status','driver','vehicle','capacity','plate','info','owner']
         #fields = '__all__'
 
 class ComRide(forms.ModelForm):

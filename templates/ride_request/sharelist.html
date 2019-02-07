@@ -4,6 +4,27 @@
     <meta charset="UTF-8">
     <title>Sharelist</title>
 </head>
+<style type="text/css">
+body {
+background-image:url(https://media.giphy.com/media/Fe22CajsYBJio/giphy.gif);
+
+     background-size:cover;
+}
+.button {
+    background-color: rgb(238,112,107);
+    border: none;
+    color: rgb(209,253,240);
+    padding: 8px 24px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 12px;
+    margin: 3px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+    }
+
+</style>
 <body>
   <!--  {% if user.is_authenticated %}-->
      <p >Valid Share Ride Shows Below:</p>
@@ -32,7 +53,7 @@
         <input type="hidden", name="sharenum", value="{{number}}">
         <!--<input type="button" value="Choose Ride">-->
 
-        <button>Choose Ride</button>
+        <button class="button">Choose Ride</button>
     </form>
      <a href="{% url 'shareride' %}">Change Search Option</a>
 </body>

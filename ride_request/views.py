@@ -1,9 +1,7 @@
 from django.shortcuts import render
 from ride_request.forms import NewRide,searchRide,ComRide
-from ride_request.models import ride_request
+from ride_request.models import ride_request,rider_pair
 from users.models import CustomUser
-from django.urls import reverse
-from django import forms
 from datetime import datetime
 # Create your views here.
 
@@ -23,16 +21,23 @@ def chosed_ride(request):
         list = owner.ride_request_set.all()
         return render(request, 'ride_request/status_view.html',context={'list':list})
     return render(request, 'ride_request/status_view.html' )
+
+
+
 def share_ride_request(request):
     if request.method == 'POST':
         oneride = request.POST
-        # if (oneride['begin'] < oneride['end']):
-        #     return render(request,"shareride")
+        print(len(oneride['OtherRe']))
         ride_list_all = ride_request.objects.filter(Destination__contains = oneride['Destination'], ride_status = 'O')
         ride_list = []
         for q in ride_list_all:
-            if str(q.arriveTime) >= oneride['begin'] and str(q.arriveTime) <= oneride['end']:
-                ride_list.append(q)
+            if (q.Share):
+             if str(q.arriveTime) >= oneride['begin'] and str(q.arriveTime) <= oneride['end']:
+                if len(q.rider_pair_set.filter(username=request.user.username))==0:
+                    if len(oneride['OtherRe'])==0:
+                        ride_list.append(q)
+                    elif oneride['OtherRe']==q.Other_request:
+                        ride_list.append(q)
         return render(request, 'ride_request/sharelist.html', context = {'list':ride_list, 'number':oneride['PassgeN']})
     return render(request, 'ride_request/ride_share_request.html')
 
@@ -45,6 +50,7 @@ def new_ride_request(request):
         #print(form)
         if form.is_valid():
             Comform = form.save(commit = False)
+            Comform.owner=request.user.username
             Comform.save()
             curr=CustomUser.objects.get(username=request.user.username)
             Comform.user.add(curr)
@@ -81,20 +87,34 @@ def view_status(request):
     }
     if request.method == 'POST':
         newStatus = request.POST
-        for i in range(0,list.count()):
+        for i in range(0,len(list)):
             if list[i].ride_status != 'C':
-                print(list[i].arriveTime)
-                print('YES')
-                print(list[i].Destination)
+                # print(list[i].arriveTime)
+                # print('YES')
+                # print(list[i].Destination)
                 temp=ride_request.objects.get(id=list[i].id)
-                temp.arriveTime = newStatus.getlist('arriveTime')[i]
-                temp.Destination =newStatus.getlist('Destination')[i]
-                temp.PassageNum = newStatus.getlist('PassageNum')[i]
-                print(temp.arriveTime)
-                temp.save()
+                if newStatus.getlist('cancel')[i]=='yes':
+                    if request.user.username==temp.owner:
+                        ride_request.objects.get(id=list[i].id).delete()
+                    else:
+                        c=temp.rider_pair_set.get(username=request.user.username)
+                        d=rider_pair.objects.get(id=c.id)
+                        print(d.number)
+                        print(temp.PassageNum)
+                        temp.PassageNum= temp.PassageNum - int(d.number)
+                        print(temp.PassageNum)
+                        this=CustomUser.objects.get(username=request.user.username)
+                        temp.user.remove(this)
+                        d.delete()
+                else:
+                    temp.arriveTime = newStatus.getlist('arriveTime')[i]
+                    temp.Destination =newStatus.getlist('Destination')[i]
+                    temp.PassageNum = newStatus.getlist('PassageNum')[i]
+
+                    temp.save()
                 # print(temp.Destination)
                 # print(newStatus.getlist('Destination')[i])
-
+        list = owner.ride_request_set.all()
         return render(request, 'ride_request/status_view.html', context={'list':list})
     return render(request, 'ride_request/status_view.html', context=context)
 

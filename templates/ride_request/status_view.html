@@ -27,12 +27,19 @@ background-image:url(https://media.giphy.com/media/3o6Ygfz2OG7kje214k/giphy.gif)
             <th>Capacity</th>
             <th>Plate number</th>
             <th>Special Info</th>
+            <th>Cancel</th>
         </tr>
       {% for ride in list %}
        <tr>
+            {% if ride.ride_status == 'O'%}
            <td><input type = "text", name = "arriveTime", value="{{ride.arriveTime}}"></td>
            <td><input type = "text", name = "Destination", value="{{ride.Destination}}"></td>
            <td><input type = "text", name = "PassageNum", value="{{ride.PassageNum}}"> </td>
+           {%else%}
+            <td>{{ride.arriveTime}} </td>
+           <td>{{ride.Destination}} </td>
+           <td> {{ride.PassageNum}}</td>
+           {%endif%}
            {% if ride.ride_status == 'F'%}
            <td> Finished </td>
            {% else %}
@@ -48,7 +55,20 @@ background-image:url(https://media.giphy.com/media/3o6Ygfz2OG7kje214k/giphy.gif)
            <td> {{ride.capacity}}</td>
            <td> {{ride.plate}} </td>
            <td> {{ride.info}} </td>
-
+           {% if ride.ride_status == 'O'%}
+           <td>Cancel this trip
+               <select name="cancel">
+                   <option value="no">no</option>
+                  <option value="yes">yes</option>
+                </select>
+           </td>
+           {%else%}
+           <td>Cancel this trip
+               <select name="cancel" style="background-color: #EEEEEE;">
+                  <option value="no">no</option>
+                </select>
+           </td>
+           {%endif%}
        </tr>
              {% endfor %}
             </table>
@@ -58,9 +78,20 @@ background-image:url(https://media.giphy.com/media/3o6Ygfz2OG7kje214k/giphy.gif)
 
 <a href="{% url 'home' %}">back</a>
     {% else %}
-      <p>You are not logged in</p>
-      <a href="{% url 'login' %}">login</a> |
-      <a href="{% url 'signup' %}">signup</a>
+      <style type="text/css">
+#txt{
+ bottom:0px;
+ text-align:center;
+ position:relative
+
+}
+</style>
+
+<div id=txt>
+    <a href="{% url 'login' %}">Login</a> |
+  <a href="{% url 'signup' %}">Signup</a>
+<p>You are not logged in</p>
+</div>
     {% endif %}
 
 </body>

@@ -30,7 +30,7 @@
            <li>Email: <input type = "email ", name = "email", value="{{usr.email}}" required></li>
            <li>
                Driver:
-                <input type = "text", name = "driver", value= "{{usr.driver }}" , list="becomedri" required>
+                <input type = "text", name = "driver", value= "{{usr.driver }}" , list="becomedri"required> * type y ('yes') or n ('no')
                  <!--{% if usr.driver == "n" %}-->
                <!--<input type = "text", name = "driver", value= No , list="becomedri" required>-->
                 <!--{% else %}-->
@@ -42,7 +42,7 @@
                 <option value="y">y</option>
             </datalist>
 
-<li> Vehicle Type:
+<li> Vehicle Brand:
         <input type = "text", name = "vehicle_brand", value="{{usr.vehicle_brand}}" list="veh-list">
                  <datalist id="veh-list">
                 <option value ="v">v</option>
@@ -53,6 +53,7 @@
                 <option value="n">n</option>
                 <option value="o">o</option>
                 </datalist>
+                * v for volvo, m for mercedes, t for toyota, a for audi, h for honda, n for nissan, o for other
             </li>
                 <!--{% if usr.vehicle_brand == "v" %}-->
 
@@ -95,9 +96,10 @@
         {% endif %}
             </li>
             <datalist id = "dri-list">
-                <option value="b">Big</option>
-                <option value="m">Medium</option>
-                <option value="l">Large</option>
+                <option >p</option>
+                <option >s</option>
+                <option >w</option>
+                <option >b</option>
             </datalist>
 
 
@@ -108,8 +110,19 @@
 </br>
 <a href="{% url 'home' %}">Back</a>
     {% else %}
-      <p>You are not logged in</p>
-      <a href="{% url 'login' %}">login</a> |
-      <a href="{% url 'signup' %}">signup</a>
+         <style type="text/css">
+#txt{
+ bottom:0px;
+ text-align:center;
+ position:relative
+
+}
+</style>
+
+<div id=txt>
+    <a href="{% url 'login' %}">Login</a> |
+  <a href="{% url 'signup' %}">Signup</a>
+<p>You are not logged in</p>
+</div>
     {% endif %}
 {% endblock %}
