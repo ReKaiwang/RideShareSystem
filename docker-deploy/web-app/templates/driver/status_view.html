@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Ride Status</title>
+</head>
+<style>
+body {
+background-image:url(https://media.giphy.com/media/Fe22CajsYBJio/giphy.gif);
+
+     background-size:cover;
+     }
+.button {
+    background-color: rgb(238,112,107);
+    border: none;
+    color: rgb(209,253,240);
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 8px;
+    margin: 3px 2px;
+    cursor: pointer;
+    border-radius: 12px;
+
+}
+
+</style>
+<body>
+{% if user.is_authenticated %}
+ {% if user.driver == "y"%}
+{% if number == 0%}
+ <p>You have no ongoing ride right now. Please refresh the web or choose back</p>
+    {%else%}
+    <p >Your ride's status shows below:</p>
+    <form name = 'riderstatus' method="POST" action="{% url 'drivestatus' %}">
+        {% csrf_token %}
+        <table border="1">
+        <tr>
+            <th>Arrive Time</th>
+            <th>Destination</th>
+            <th>Passage Number</th>
+            <th>Ride Status</th>
+            <th>Finish The Ride</th>
+            <th>Riders</th>
+        </tr>
+      {% for ride in list %}
+       <tr>
+           <td>{{ride.arriveTime}}</td>
+           <td>{{ride.Destination}}</td>
+           <td>{{ride.PassageNum}} </td>
+           <td>{{ride.ride_status}}</td>
+           <td><input type="radio", name="finish" value={{ride.id}} >
+           </td>
+                       <td>   {%for user in ride.rider_pair_set.all%}
+                           <li>---------------------</li>
+                           <li> user: {{ user.username}}</li>
+                           <li>number of passenger: {{user.number}}</li>
+               {%endfor%}</td>
+       </tr>
+        {% endfor %}
+        </table>
+
+        <button class="button">Confirm Choice</button>
+    </form>
+{%endif%}
+    {%else%}
+    <p> you are not a driver! Become a driver by modifying your profile</p><br>
+        {% endif %}
+</br>
+</br>
+<a href="{% url 'home' %}">Back</a>
+    {% else %}
+      <p>You are not logged in</p>
+      <a href="{% url 'login' %}">Login</a> |
+      <a href="{% url 'signup' %}">SignUp</a>
+    {% endif %}
+</body>
+</html>

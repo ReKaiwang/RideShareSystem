@@ -1,0 +1,20 @@
+<!-- templates/signup.html -->
+{% extends 'base.html' %}
+
+{% block title %}Sign Up{% endblock %}
+
+{% block content %}
+{% if user.is_authenticated %}
+<p>log out before you signup</p>
+  <p><a href="{% url 'logout' %}">logout</a></p>
+{%else%}
+<h2>Sign up</h2>
+<form method="post">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit">Sign up</button>
+  <br><a href="{% url 'home' %}">back</a>
+
+</form>
+{%endif%}
+{% endblock %}
